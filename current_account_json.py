@@ -5,7 +5,6 @@ import json
 from beancount.core import data, flags
 from beancount.core.amount import Amount, div
 from beancount.core.number import ZERO, D
-from categorisers.monzo import TransactionCategoriser
 
 from beancount.utils.date_utils import parse_date_liberally
 
@@ -141,10 +140,10 @@ class Importer(filing.FilingMixin):
 
         return entries
 
-    def __init__(self, account, account_id):
+    def __init__(self, account, account_id, categorizer=None):
         self.filing_account = account
         self.FLAG = flags.FLAG_WARNING
-        self.categorizer = TransactionCategoriser()
+        self.categorizer = categorizer
         self.account_id = account_id
         self.prefix = 'monzo'
         self.currency = "GBP"
